@@ -17,6 +17,7 @@ h1,h2 {
 
 body {
     background-color: #606c38;
+    color: purple;
 }
 
 #back1 {
@@ -96,4 +97,8 @@ p::selection {
 button:hover {
     background-color: olive;
     font-size: 10px;
+}
+
+button {
+    background-color: magenta !important ;
 }
