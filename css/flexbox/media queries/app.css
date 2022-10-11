@@ -16,7 +16,15 @@ ul,li {
     display: inline;
     margin: 0;
     padding: 0;
+    
+}
+
+ul {
     border:  1px solid red;
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /* @media (min-width: 600px)and (max-width: 800px) {
@@ -72,6 +80,11 @@ h1 {
     h1 {
         font-size: 4em;
     }
+    nav, nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }
 
 @media (max-width:576px) {
