@@ -1,3 +1,27 @@
+const day = 1;
+switch (day) {
+    case 2: 
+        console.log('tuesday');
+        break;
+    case 3: 
+        console.log('wednesday');
+        break;
+    case 5: 
+        console.log('Friday');
+        break;
+    default:
+        console.log('what the hell is that?');
+        break;
+}
+
+// const password = prompt("enter your password");
+// if (password.length >= 6 && password.indexOf(' ') === -1) {
+//     console.log('valid password');
+// }else {
+//     console.log('incorrect password format');
+// }
+
+
 // console.log("before conditional");
 // let random = Math.random();
 // if (random < 0.5) {
@@ -11,31 +35,35 @@
 // console.log("after conditional");
 
 
-const dayOfWeek = prompt('enter a day').toLowerCase();
+// const dayOfWeek = prompt('enter a day').toLowerCase();
 
-if (dayOfWeek === 'monday') {
-    console.log("i hate mondays");
-}
-else if (dayOfWeek === 'saturday') {
-    console.log("i love saturdays");
-}
-else if (dayOfWeek === 'friday') {
-    console.log("fridays are decent especially after work!");
-}
-else {
-    console.log("meh");
-}
-// const age = 66;
-
-// if (age <= 5) {
-//     console.log(free);
+// if (dayOfWeek === 'monday') {
+//     console.log("i hate mondays");
 // }
-// else if (age <10) {
+// else if (dayOfWeek === 'saturday') {
+//     console.log("i love saturdays");
+// }
+// else if (dayOfWeek === 'friday') {
+//     console.log("fridays are decent especially after work!");
+// }
+// else {
+//     console.log("meh");
+// }
+
+// const age = 199;
+
+// if (!(age >= 0 && age <= 5 || age >= 65)) {
+//     console.log('free or boomer');
+// }
+// else if (age >= 5 && age <10) {
 //     console.log("child $10");
 // }
-// else if (age <65) {
+// else if (age >= 10 && age <65) {
 //     console.log("adult $20");
+// }else {
+//     console.log('invalid age');
 // }
+
 // else if (age >=65) {
 //     console.log("boomer $10");
 // }
