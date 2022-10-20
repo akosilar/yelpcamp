@@ -1,17 +1,17 @@
-// const password = prompt('enter password');
+const password = prompt('enter password');
 
-// //password 6 char
-// if (password.length >= 6) {
-//     //password cannot include space
-// if (password.indexOf(' ') === -1) {
-//     console.log('gj. No space');
-// } else {
-//     console.log('password cannot contain space');
-// }
-//     console.log('long enough');
-// }else {
-//     console.log('too short');
-// }
+//password 6 char
+if (password.length >= 6) {
+    //password cannot include space
+if (password.indexOf(' ') === -1) {
+    console.log('gj. No space');
+} else {
+    console.log('password cannot contain space');
+}
+    console.log('long enough');
+}else {
+    console.log('too short');
+}
 
 
 
@@ -32,6 +32,20 @@
 
 // if (dayOfWeek === 'monday') {
 //     console.log("i hate mondays");
+// }
+// else if (dayOfWeek === 'saturday') {
+//     console.log("i love saturdays");
+// }
+// else if (dayOfWeek === 'friday') {
+//     console.log("fridays are decent especially after work!");
+// }
+// else {
+//     console.log("meh");
+// }
+// const age = 66;
+
+// if (age <= 5) {
+//     console.log(free);
 // }
 // else if (dayOfWeek === 'saturday') {
 //     console.log("i love saturdays");
