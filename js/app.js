@@ -1,25 +1,18 @@
-const day = 1;
-switch (day) {
-    case 2: 
-        console.log('tuesday');
-        break;
-    case 3: 
-        console.log('wednesday');
-        break;
-    case 5: 
-        console.log('Friday');
-        break;
-    default:
-        console.log('what the hell is that?');
-        break;
-}
+// const password = prompt('enter password');
 
-// const password = prompt("enter your password");
-// if (password.length >= 6 && password.indexOf(' ') === -1) {
-//     console.log('valid password');
-// }else {
-//     console.log('incorrect password format');
+// //password 6 char
+// if (password.length >= 6) {
+//     //password cannot include space
+// if (password.indexOf(' ') === -1) {
+//     console.log('gj. No space');
+// } else {
+//     console.log('password cannot contain space');
 // }
+//     console.log('long enough');
+// }else {
+//     console.log('too short');
+// }
+
 
 
 // console.log("before conditional");
