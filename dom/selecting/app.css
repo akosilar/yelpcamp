@@ -3,6 +3,16 @@ body {
     margin: 0 auto;
 }
 
+h1 {
+    color: olive;
+}
+.purple {
+    color: #7b07ff;
+}
+
+.border {
+    border: 3px solid greenyellow;
+}
 #banner {
     width: 100%;
 }
