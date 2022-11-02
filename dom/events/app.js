@@ -20,4 +20,19 @@ document.querySelector('h1').onclick = () => {
 
 
 const btn3 = document.querySelector('#v3');
-btn3.addEventListener('click', inform);
+btn3.addEventListener('mousedown', inform);
+
+
+function twist() {
+    console.log("TWIST");
+}
+function shout() {
+    console.log("SHOUT");
+}
+
+const tasButton = document.querySelector('#tas');
+
+// tasButton.onclick = twist;
+// tasButton.onclick = shout;
+tasButton.addEventListener('click', twist, {once: true});
+tasButton.addEventListener('click', shout);
