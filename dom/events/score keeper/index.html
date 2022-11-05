@@ -5,25 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Score Keeper</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+
+    <style>
+      .winner {
+        color: green;
+      }
+      .loser {
+        color: red;
+      }
+    </style>
   </head>
   <body>
-    <div>
-      <h2>ping pong score keeper</h2>
-      <span id="score1">0</span> to <span id="score2">0</span>
-      Use the button below to keep score
-      <b>Playing To </b
-      ><select name="scoreLimit" id="scoreLimit">
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-      <button id="increase1">+1 Player One</button>
-      <button id="increase2">+1 Player Two</button>
-      <button id="reset">Reset</button>
+    <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">Ping Pong Score Keeper</p>
+              <button class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </header>
+            <div class="card-image is-2by1">
+              <img src="https://i.ytimg.com/vi/F1gwPy7ND_g/hqdefault.jpg" alt="">
+            </div>
+            <div class="card-content">
+             <h1 class="title is-1"><span id="score1" >0</span> to <span id="score2">0</span></h1>
+              <p class="subtitle">Use the buttons below to keep score.</p>
+              <label for="scoreLimit" class="label is-large is-inline">Playing To</label>
+              <div class="select is-rounded">
+                <select name="scoreLimit" id="scoreLimit" >
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select></div>
+              
+            </div>
+
+                <footer class="card-footer">
+                  <button class="is-primary button card-footer-item is-large" id="increase1">+1 Player One</button>
+                  <button class="is-info button card-footer-item is-large" id="increase2">+1 Player Two</button>
+                  <button class="is-danger button card-footer-item is-large" id="reset">Reset</button>
+
+                </footer>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div>
+    </section>
+  
     <script src="app.js"></script>
   </body>
 </html>
