@@ -23,27 +23,58 @@ const fakeRequestPromise = (url) => {
     })
 }
 
-fakeRequestCallback('books.com/page1',
-    function (response) {
-        console.log('it worked');
-        console.log(response);
-        fakeRequestCallback('books.com/page2',
-        function (response) {
-            console.log('it worked again',response)
-            fakeRequestCallback('books.com/page3',
-            function(response) {
-                console.log('it worked again 2', response)
-            }, function (err) {
-                console.log('error 3',err)
-            })
-        },
-        function(err) {
-            console.log('error2',err)
-        })
-    }, function (err) {
-        console.log('error');
-        console.log(err);
+fakeRequestPromise('yelp.com/api/coffee/page1')
+.then((data) => {
+    console.log('it worked page 1',data)
+    return fakeRequestPromise('yelp.com/api/coffee/page2')
 })
+.then((data) => {
+    console.log('it worked page 2',data)
+    return fakeRequestPromise('yelp.com/api/coffee/page3')
+})
+.then((data) => {
+    console.log('it worked page 3',data)
+})
+.catch((err) => {
+    console.log('oh no, a request failed',err)
+})
+
+
+// const request = fakeRequestPromise('yelp.com/api/coffee/page1');
+// request.
+//     then((resolve) => {
+//         console.log('it worked',resolve)
+//         fakeRequestPromise('yelp.com/api/coffee/page2')
+//         .then((resolve) => {
+//             console.log('it worked 2nd',resolve)
+//         })
+//         .catch((err) => {
+//             console.log('it error 2nd',err)
+//         })
+//     }).catch((err) => {
+//         console.log('oh no, error!',err)
+//     })
+// fakeRequestCallback('books.com/page1',
+//     function (response) {
+//         console.log('it worked');
+//         console.log(response);
+//         fakeRequestCallback('books.com/page2',
+//         function (response) {
+//             console.log('it worked again',response)
+//             fakeRequestCallback('books.com/page3',
+//             function(response) {
+//                 console.log('it worked again 2', response)
+//             }, function (err) {
+//                 console.log('error 3',err)
+//             })
+//         },
+//         function(err) {
+//             console.log('error2',err)
+//         })
+//     }, function (err) {
+//         console.log('error');
+//         console.log(err);
+// })
 
 // fakeRequestCallback('books.com/page1',
 //     function (response) {
