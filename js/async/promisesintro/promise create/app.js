@@ -3,7 +3,7 @@ const fakeRequest = (url) => {
         const rand = Math.random();
         setTimeout(() => {
             if(rand < 0.7) {
-                resolve('your fake data here',url);
+                resolve(`your fake data here ${url}`);
 
             }
             reject('request error')
@@ -21,8 +21,14 @@ const fakeRequest = (url) => {
 
 
 async function makeTwoRequests() {
-   let data1 = await fakeRequest('/page1');
-   console.log(data1);
+    try {
+        let data1 = await fakeRequest('/page1');
+        let data2 = await fakeRequest('/page2');
+        console.log(data1,data2)
+    } catch (error) {
+        console.log('caught an error:', error)
+    }
+   
 }
 
 makeTwoRequests();
