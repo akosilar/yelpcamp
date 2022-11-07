@@ -11,10 +11,18 @@ const fakeRequest = (url) => {
     })
 }
 
-fakeRequest('/bats/1')
-    .then((data) => {
-        console.log('done with request!',data)
-    })
-    .catch((err) => {
-        console.log('oh noes',err)
-    })
+// fakeRequest('/bats/1')
+//     .then((data) => {
+//         console.log('done with request!',data)
+//     })
+//     .catch((err) => {
+//         console.log('oh noes',err)
+//     })
+
+
+async function makeTwoRequests() {
+   let data1 = await fakeRequest('/page1');
+   console.log(data1);
+}
+
+makeTwoRequests();

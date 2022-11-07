@@ -39,21 +39,40 @@ const delayedColorchange = (color,delay) => {
     })
 }
 
-delayedColorchange('red',1000)
-    .then(() => {
-        return delayedColorchange('orange',1000)
+// delayedColorchange('red',1000)
+//     .then(() => {
+//         return delayedColorchange('orange',1000)
+//     })
+//     .then(() => {
+//        return delayedColorchange('yellow', 1000)
+//     })
+//     .then(() => delayedColorchange('green', 1000))
+//     .then(() => delayedColorchange('blue', 1000))
+//     .then(() => delayedColorchange('indigo', 1000))
+//     .then(() => delayedColorchange('violet', 1000))
+
+async function rainbow() {
+    await delayedColorchange('red', 1000)
+    await delayedColorchange('orange', 1000)
+    await delayedColorchange('yellow', 1000)
+    await delayedColorchange('green', 1000)
+    await delayedColorchange('blue', 1000)
+    await delayedColorchange('indigo', 1000)
+    await delayedColorchange('violet', 1000)
+    return "all done"
+
+}
+
+// rainbow().then((data) => console.log('end of rainbow',data))
+
+async function printRainbow() {
+    await rainbow()
+    .then((data) => {
+        console.log('end of rainbow',data)
     })
-    .then(() => {
-       return delayedColorchange('yellow', 1000)
-    })
-    .then(() => delayedColorchange('green', 1000))
-    .then(() => delayedColorchange('blue', 1000))
-    .then(() => delayedColorchange('indigo', 1000))
-    .then(() => delayedColorchange('violet', 1000))
+}
 
-
-
-
+printRainbow()
 
 // delayedColorchange('red',1000, ()=>{
 //     delayedColorchange('orange', 1000, () => {
