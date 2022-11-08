@@ -15,11 +15,16 @@
 //     console.log('oh noe promise rej',err)
 // })
 
-const login = async (username,password) => {
-    if (!username || !password) throw 'Missing Credentials' 
-    if (password === 'corgifeetarecute') return 'welcome!'
-    throw 'invalid password'
-    
+const login = async (username,password) => try {
+	{
+	    
+	    if (!username || !password) throw 'Missing Credentials' 
+	    if (password === 'corgifeetarecute') return 'welcome!'
+	    throw 'invalid password'
+	    
+	}
+} catch (error) {
+	
 }
 
 login('lars20000','corgifeetarecute')
