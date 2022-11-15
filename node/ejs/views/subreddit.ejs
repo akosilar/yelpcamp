@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= subreddit %></title>
-  </head>
-  <body>
-    <h1>welcome to r/<%= subreddit %></h1>
-    <h2><%= name %></h2>
-    <h2><%= description %></h2>
-    <p>subscribers:<%= subscribers %></p>
-    <hr />
+<%- include('partials/head') %> <%- include('partials/navbar') %>
 
-    <% posts.forEach(data => { %>
-    <div>
-      <p><%= data.title %> - <b> <%= data.author %></b></p>
-      <% if(data.img) { %>
-      <img src="<%= data.img %> " alt="" />
-      <% } %>
-    </div>
-    <% }); %>
-  </body>
-</html>
+<div class="container">
+  <h1>welcome to r/<%= subreddit %></h1>
+  <h2><%= name %></h2>
+  <h2><%= description %></h2>
+  <p>subscribers:<%= subscribers %></p>
+  <hr />
+
+  <% posts.forEach(data => { %>
+  <div>
+    <p><%= data.title %> - <b> <%= data.author %></b></p>
+    <% if(data.img) { %>
+    <img src="<%= data.img %> " alt="" />
+    <% } %>
+  </div>
+  <% }); %>
+</div>
+<%- include('partials/footer') %>
