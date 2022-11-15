@@ -8,5 +8,18 @@
   </head>
   <body>
     <h1>welcome to r/<%= subreddit %></h1>
+    <h2><%= name %></h2>
+    <h2><%= description %></h2>
+    <p>subscribers:<%= subscribers %></p>
+    <hr />
+
+    <% posts.forEach(data => { %>
+    <div>
+      <p><%= data.title %> - <b> <%= data.author %></b></p>
+      <% if(data.img) { %>
+      <img src="<%= data.img %> " alt="" />
+      <% } %>
+    </div>
+    <% }); %>
   </body>
 </html>
