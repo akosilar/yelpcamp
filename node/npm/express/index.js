@@ -43,10 +43,24 @@ app.get('/dogs', (req,res) => {
   res.send('woof')
 })
 
+//search routes
+app.get('/search', (req,res) => {
+  const {q,color} = req.query
+  if(!q){
+    res.send('nothing found')
+  }else{
+    console.log(req.query)
+  res.send(`i'm reading q is ${q} and color is ${color}`)
+  }
+  
+})
+
 //default route must be placed/ordered at the end
 app.get('*', (req,res) => {
   res.send('i dunno that path')
 })
+
+
 // app.get('/', (req, res) => {
 //   res.send(`<h1>hello world</h1>`)
 // })
