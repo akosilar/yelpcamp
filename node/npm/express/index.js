@@ -15,7 +15,7 @@ const port = 3000
 
 //home route
 app.get('/',(req,res) => {
-  res.send('this is the homepage')
+  res.send('this is the homepage!!!')
 })
 
 app.get('/r/:subreddit/',(req,res) => {
