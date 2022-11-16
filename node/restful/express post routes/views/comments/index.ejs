@@ -10,8 +10,12 @@
     <h1>comments:</h1>
     <ul>
       <% comments.forEach(data => { %>
-      <li><%= data.comment %> - <b> <%= data.username %></b></li>
+      <li>
+        <%= data.comment %> - <b> <%= data.username %></b>
+        <a href="/comments/<%= data.id %> ">link</a>
+      </li>
       <% }); %>
     </ul>
+    <a href="comments/new">new comment</a>
   </body>
 </html>
