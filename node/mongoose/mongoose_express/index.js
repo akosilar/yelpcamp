@@ -21,6 +21,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method'))
 
+const categories = ['fruit', 'vegetable', 'dairy', 'mushrooms']
 
 //display all products
 app.get('/products', async (req,res) => {
@@ -31,7 +32,7 @@ app.get('/products', async (req,res) => {
 
 //show create a product
 app.get('/products/new', (req,res) => {
-    res.render('./products/new')
+    res.render('./products/new', {categories})
 })
 
 //show product detail
@@ -46,7 +47,7 @@ app.get('/products/:id', async (req,res) => {
 app.get('/products/:id/edit', async (req,res) => {
     const {id} = req.params
     const product = await Product.findById(id)
-    res.render('./products/edit', {product})
+    res.render('./products/edit', {product, categories})
     console.log(product)
 })
 
