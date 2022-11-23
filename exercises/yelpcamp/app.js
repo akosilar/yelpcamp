@@ -3,8 +3,11 @@ const mongoose = require('mongoose')
 const app = express()
 const path = require('path')
 const Campground = require('./models/campground')
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp')
+
+const dbURI = process.env.dbURI
+mongoose.connect(dbURI)
 
 const db = mongoose.connection
 db.on('error', console.error.bind(console,'connection error'))
