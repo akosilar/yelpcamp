@@ -16,6 +16,8 @@ mongoose.connect('mongodb://localhost:27017/farmStand')
 })
 
 
+
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
