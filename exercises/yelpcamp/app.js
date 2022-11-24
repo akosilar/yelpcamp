@@ -18,6 +18,8 @@ db.once('open', () => {
 //middleware for ejs, and directory
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 
 //show a list of campgrounds
 app.get('/campgrounds', async (req,res) => {
@@ -25,11 +27,23 @@ app.get('/campgrounds', async (req,res) => {
    res.render('campgrounds/index',{campgrounds})
 })
 
+//show add new campground page
+app.get('/campgrounds/new', (req,res) => {
+    res.render('campgrounds/new')
+})
+
+app.post('/campgrounds', async (req,res) => {
+    const campground = new Campground(req.body.campground)
+    await campground.save()
+    res.redirect(`/campgrounds/${campground._id}`)
+})
+
 //show campground detail
 app.get('/campgrounds/:id', async (req,res) => {
     const search = await Campground.findById(req.params.id)
     res.render('campgrounds/show',{search})
 })
+
 
 
 
