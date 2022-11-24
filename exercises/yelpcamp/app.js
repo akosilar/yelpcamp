@@ -15,13 +15,20 @@ db.once('open', () => {
     console.log('db connected')
 })
 
-
+//middleware for ejs, and directory
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+//show a list of campgrounds
 app.get('/campgrounds', async (req,res) => {
    const campgrounds = await Campground.find({})
    res.render('campgrounds/index',{campgrounds})
+})
+
+//show campground detail
+app.get('/campgrounds/:id', async (req,res) => {
+    const search = await Campground.findById(req.params.id)
+    res.render('campgrounds/show',{search})
 })
 
 
