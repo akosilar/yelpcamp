@@ -8,9 +8,12 @@
   </head>
   <body>
     <h1>All Campgrounds</h1>
+    <div>
+      <a href="/campgrounds/new">Add Campground</a>
+    </div>
     <ul>
       <% campgrounds.forEach(camp => { %>
-      <li><%= camp.title %></li>
+      <li><a href="/campgrounds/<%= camp._id %> "><%= camp.title %></a></li>
       <% }); %>
     </ul>
   </body>
