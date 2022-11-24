@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-
+const cities = require('./cities')
+const {places,descriptors} = require('./seedHelpers')
 const Campground = require('../models/campground')
 
 require('dotenv').config();
@@ -14,10 +15,25 @@ db.once('open', () => {
     console.log('db connected')
 })
 
-const seedDB = async () => {
-    await Campground.deleteMany({});
-    const c = new Campground({title: 'purple field'})
-    await c.save()
+//pick a random element in an array
+const sample = (array) => {
+    return array[Math.floor(Math.random() * array.length)]
 }
 
-seedDB()
+const seedDB = async () => {
+    await Campground.deleteMany({});
+    for(let i = 0; i<50; i++) {
+        const random1000 = Math.floor(Math.random()* 1000);
+        const camp = new Campground({
+            location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            title: `${sample(descriptors)} ${sample(places)}`
+        })
+        await camp.save()
+    }
+    // const c = new Campground({title: 'purple field'})
+    // await c.save()
+}
+
+seedDB().then(() => {
+    mongoose.connection.close()
+})
