@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const app = express()
 const path = require('path')
+const ejsMate = require('ejs-mate')
 const Campground = require('./models/campground')
 require('dotenv').config();
 
@@ -21,6 +22,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method'))
+app.engine('ejs', ejsMate)
 
 
 //show a list of campgrounds
