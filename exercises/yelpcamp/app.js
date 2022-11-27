@@ -1,3 +1,10 @@
+// import { createRequire } from "module";
+// import nodeFetch from 'node-fetch';
+
+// const require = createRequire(import.meta.url);
+// import { createApi } from 'unsplash-js';
+
+
 const express = require('express')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
@@ -7,6 +14,18 @@ const ejsMate = require('ejs-mate')
 const Campground = require('./models/campground')
 require('dotenv').config();
 
+// const {createApi} = require('unsplash-js')
+
+
+// const unsplash = createApi({
+//     accessKey: '-rzil0-EoZN5be0YoX4LeViR-fJCnP0gdW4pDk5VrPU',
+//     fetch: nodeFetch,
+
+// });
+
+// const randomPhoto = unsplash.photos.getRandom({
+//     collectionIds: ['483251']
+// })
 
 const dbURI = process.env.dbURI
 mongoose.connect(dbURI)
