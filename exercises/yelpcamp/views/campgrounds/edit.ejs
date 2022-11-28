@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') %>
 
-<h1>Edit Campground</h1>
-<form action="/campgrounds/<%= search._id %>?_method=PUT " method="post">
+<!-- <h1>Edit Campground</h1> -->
+<!-- <form action="/campgrounds/<%= search._id %>?_method=PUT " method="post">
   <div>
     <label for="title">title</label>
     <input
@@ -22,4 +22,75 @@
   </div>
   <button>Save</button>
 </form>
-<a href="/campgrounds/<%= search._id %> ">Back to Campgrounds</a>
+<a href="/campgrounds/<%= search._id %> ">Back to Campgrounds</a> -->
+
+<div class="row">
+  <h1 class="text-center">Edit Campground</h1>
+  <div class="col-6 offset-3">
+    <form action="/campgrounds/<%= search._id %>?_method=PUT " method="post">
+      <div class="mb-3">
+        <label for="title" class="form-label">title</label>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="campground[title]"
+          value="<%= search.title %> "
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">location</label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="campground[location]"
+          value="<%= search.location %> "
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="image">Image Url</label>
+        <input
+          class="form-control"
+          type="text"
+          id="image"
+          name="campground[image]"
+          value="<%= search.image %> "
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Campground Price</label>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="price-label">$</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="0.00"
+            aria-label="price-label"
+            aria-describedby="price-label"
+            name="campground[price]"
+            value="<%= search.price %> "
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="campground[description]"
+        >
+<%= search.description %> </textarea
+        >
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-info">Update Campground</button>
+      </div>
+    </form>
+
+    <a href="/campgrounds/<%= search._id %> ">Back to Campgrounds</a>
+  </div>
+</div>
