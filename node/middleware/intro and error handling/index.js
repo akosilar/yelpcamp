@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
+const AppError = require('./appError')
 
 
 // app.use(morgan('tiny'))
@@ -21,10 +22,12 @@ const verifyPassword = (req,res,next) => {
     if(password === 'chickennugget') {
         next()
     }
+    throw new AppError('password required', 401)
     // else{
     //     res.send('sorry, you need a password')
     // }
-    throw new Error('password required')
+    // res.status(401)
+    // throw new Error('password required')
     // console.log(req.query)
 }
 
@@ -46,18 +49,24 @@ app.get('/secret', verifyPassword,(req,res) => {
     res.send('my secret is: is secret my')
 })
 
+app.get('/admin', (req,res) => {
+    throw new AppError('You are not an Admin', 403)
+})
 
 app.use((req,res) => {
     res.status(404).send('not found')
 })
 
 app.use((err,req,res,next) => {
-    console.log('****')
-    console.log('**error**')
-    console.log('****')
-    // res.status(500).send('oh boy, error')
-    console.log(err)
-    next(err)
+    const {status = 500, message = 'something went wrong'} = err
+
+    res.status(status).send(message)
+    // console.log('****')
+    // console.log('**error**')
+    // console.log('****')
+    // // res.status(500).send('oh boy, error')
+    // console.log(err)
+    // next(err)
 
 })
 
