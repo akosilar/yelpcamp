@@ -4,7 +4,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const Product = require('./models/product')
 const methodOverride = require('method-override')
-
+const AppError = require('./appError')
 
 mongoose.connect('mongodb://localhost:27017/farmStand')
 .then(() => {
@@ -43,21 +43,28 @@ app.get('/products', async (req,res) => {
 
 //show create a product
 app.get('/products/new', (req,res) => {
+    throw new AppError('Not allowed', 401)
     res.render('./products/new', {categories})
 })
 
 //show product detail
-app.get('/products/:id', async (req,res) => {
+app.get('/products/:id', async (req,res,next) => {
     const {id} = req.params
     const product = await Product.findById(id)
+    if(!product) {
+       return next(new AppError('product not found', 404))
+    }
     res.render('./products/detail', {product})
     console.log(product)
 })
 
 //show edit product
-app.get('/products/:id/edit', async (req,res) => {
+app.get('/products/:id/edit', async (req,res,next) => {
     const {id} = req.params
     const product = await Product.findById(id)
+    if(!product) {
+        return next(new AppError('product not found', 404))
+     }
     res.render('./products/edit', {product, categories})
     console.log(product)
 })
@@ -86,6 +93,11 @@ app.delete('/products/:id', async (req,res) => {
     const product = await Product.findByIdAndDelete(id)
     res.redirect('/products')
 
+})
+
+app.use((err,req,res,next) => {
+    const {status = 500, message = 'something went wrong'} = err
+    res.status(status).send(message)
 })
 
 app.listen(3000, () => {
