@@ -20,9 +20,11 @@ const verifyPassword = (req,res,next) => {
     const { password } = req.query
     if(password === 'chickennugget') {
         next()
-    }else{
-        res.send('sorry, you need a password')
     }
+    // else{
+    //     res.send('sorry, you need a password')
+    // }
+    throw new Error('password required')
     // console.log(req.query)
 }
 
@@ -31,13 +33,17 @@ app.get('/', (req,res) => {
     res.send('home page')
 })
 
+app.get('/error', (req,res) => {
+    chicken.fly()
+})
+
 app.get('/dogs', (req,res) => {
     console.log(`request date: ${req.requestTime}`)
     res.send('woof woof')
 })
 
 app.get('/secret', verifyPassword,(req,res) => {
-    res.send('my secret is: sike')
+    res.send('my secret is: is secret my')
 })
 
 
