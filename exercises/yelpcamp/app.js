@@ -14,6 +14,7 @@ const ejsMate = require('ejs-mate')
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
+const {campgroundSchema} = require('./schemas.js')
 require('dotenv').config();
 
 // const {createApi} = require('unsplash-js')
@@ -42,8 +43,21 @@ db.once('open', () => {
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method')) //for routes other than get and post
 app.engine('ejs', ejsMate)
+
+//server db validation
+const validateCampground = (req,res,next) => {
+  
+    const {error} = campgroundSchema.validate(req.body)
+    if(error){
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg,400)
+    } else {
+        next()
+    }
+    // console.log(result)
+}
 
 
 //show a list of campgrounds
@@ -57,8 +71,9 @@ app.get('/campgrounds/new', (req,res) => {
     res.render('campgrounds/new')
 })
 //add the new campground to db
-app.post('/campgrounds', catchAsync(async (req,res,next) => {
-    if(!req.body.campground) throw new ExpressError('invalid campground data', 400)
+app.post('/campgrounds', validateCampground,catchAsync(async (req,res,next) => {
+    // if(!req.body.campground) throw new ExpressError('invalid campground data', 400)
+
     const campground = new Campground(req.body.campground)
     await campground.save()
     res.redirect(`/campgrounds/${campground._id}`)
@@ -77,7 +92,7 @@ app.get('/campgrounds/:id/edit',catchAsync(async(req,res) => {
     res.render('campgrounds/edit',{search})
 }))
 //submit the campground edit to db
-app.put('/campgrounds/:id', catchAsync(async(req,res) => {
+app.put('/campgrounds/:id',validateCampground,catchAsync(async(req,res) => {
     const {id} = req.params
     const update = await Campground.findByIdAndUpdate(id, {...req.body.campground})
     res.redirect(`/campgrounds/${update._id}`)
