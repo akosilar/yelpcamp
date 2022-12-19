@@ -9,6 +9,6 @@ router.get('/:id', (req,res) => {
     res.send('viewing one dog')
 })
 router.get('/:id/edit', (req,res) => {
-    res.send('editing one dogs')
+    res.send('editing one dogs ')
 })
 module.exports = router
