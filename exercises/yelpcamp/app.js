@@ -4,7 +4,7 @@ const methodOverride = require('method-override')
 const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
-const catchAsync = require('./utils/catchAsync')
+
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
 const Review = require('./models/review')
@@ -33,18 +33,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method')) //for routes other than get and post
 app.engine('ejs', ejsMate)
+app.use(express.static(path.join(__dirname,'public'))) //allows use of static assets in the public folder
 
-//server db validation
-const validateReview = (req,res,next) => {
-
-    const {error} = reviewSchema.validate(req.body)
-    if(error){
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg,400)
-    } else {
-        next()
-    }
-}
 
 //router
 app.use('/campgrounds', campgrounds)
