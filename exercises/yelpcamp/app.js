@@ -4,6 +4,7 @@ const methodOverride = require('method-override')
 const app = express()
 const path = require('path')
 const ejsMate = require('ejs-mate')
+const session = require('express-session')
 
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
@@ -35,6 +36,18 @@ app.use(methodOverride('_method')) //for routes other than get and post
 app.engine('ejs', ejsMate)
 app.use(express.static(path.join(__dirname,'public'))) //allows use of static assets in the public folder
 
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //expire the cookie a week from now
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig))
 
 //router
 app.use('/campgrounds', campgrounds)
