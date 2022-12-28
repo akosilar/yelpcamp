@@ -45,13 +45,26 @@ router.post('/', validateCampground,catchAsync(async (req,res,next) => {
 //show campground detail
 router.get('/:id', catchAsync(async (req,res) => {
     const search = await Campground.findById(req.params.id).populate('reviews')
-    res.render('campgrounds/show',{search})
+    if(!search) {
+        req.flash('error', 'Cannot find that campground!')
+        res.redirect('/campgrounds')
+    }else{
+        res.render('campgrounds/show',{search})
+
+    }
 }))
 
 //show edit campground
 router.get('/:id/edit',catchAsync(async(req,res) => {
     const search = await Campground.findById(req.params.id)
-    res.render('campgrounds/edit',{search})
+    if(!search) {
+        req.flash('error', 'Cannot find that campground!')
+        res.redirect('/campgrounds')
+    }
+    else {
+        res.render('campgrounds/edit',{search})
+
+    }
 }))
 
 //submit the campground edit to db
