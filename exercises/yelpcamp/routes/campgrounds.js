@@ -4,7 +4,8 @@ const catchAsync = require('../utils/catchAsync')
 const ExpressError = require('../utils/ExpressError')
 const Campground = require('../models/campground')
 const {campgroundSchema} = require('../schemas.js')
-const {isLoggedIn} = require('../middleware')
+const {isLoggedIn} = require('../middleware');
+const campground = require('../models/campground');
 
 
 //server db validation
@@ -37,6 +38,7 @@ router.post('/', isLoggedIn,validateCampground,catchAsync(async (req,res,next) =
     // if(!req.body.campground) throw new ExpressError('invalid campground data', 400)
 
     const campground = new Campground(req.body.campground)
+    campground.author = req.user._id;
     await campground.save()
     req.flash('success', 'Successfully made a new campground!')
     res.redirect(`/campgrounds/${campground._id}`)
@@ -45,7 +47,7 @@ router.post('/', isLoggedIn,validateCampground,catchAsync(async (req,res,next) =
 
 //show campground detail
 router.get('/:id',catchAsync(async (req,res) => {
-    const search = await Campground.findById(req.params.id).populate('reviews')
+    const search = await Campground.findById(req.params.id).populate('reviews').populate('author')
     if(!search) {
         req.flash('error', 'Cannot find that campground!')
         res.redirect('/campgrounds')
