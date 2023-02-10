@@ -77,12 +77,15 @@
           By <%= review.author.username%>
         </h6>
         <p class="card-text">Review: <%= review.body %></p>
+        <% if(currentUser && review.author.equals(currentUser)) {%>
+
         <form
           action="/campgrounds/<%= search.id %>/reviews/<%= review._id %>?_method=DELETE"
           method="post"
         >
           <button class="btn btn-sm btn-danger">Delete</button>
         </form>
+        <% } %>
       </div>
     </div>
     <% } %>
