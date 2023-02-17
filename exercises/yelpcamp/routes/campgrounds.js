@@ -6,11 +6,16 @@ const {isLoggedIn,isAuthor,validateCampground} = require('../middleware');
 const campground = require('../models/campground');
 const campgrounds = require('../controllers/campgrounds');
 const { route } = require('./users');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 router.route('/')
     .get(catchAsync(campgrounds.index)) //show a list of campgrounds
-    .post(isLoggedIn,validateCampground,catchAsync(campgrounds.createCampground)) //add the new campground to db
-
+    // .post(isLoggedIn,validateCampground,catchAsync(campgrounds.createCampground)) //add the new campground to db
+    .post(upload.array('image'),(req,res)=> {
+        console.log(req.body,req.files)
+        res.send('it works')
+    })
 
 
 //show add new campground page
