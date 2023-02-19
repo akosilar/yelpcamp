@@ -19,8 +19,10 @@ const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
 
-require('dotenv').config();
 
 
 
