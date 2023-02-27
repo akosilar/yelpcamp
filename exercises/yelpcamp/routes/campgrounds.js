@@ -24,7 +24,7 @@ router.get('/new', isLoggedIn, campgrounds.renderNewForm)
 
 router.route('/:id')
     .get(catchAsync(campgrounds.showCampground)) //show campground detail
-    .put(isLoggedIn,isAuthor,validateCampground,catchAsync(campgrounds.updateCampground)) //submit the campground edit to db
+    .put(isLoggedIn,isAuthor,upload.array('image'),validateCampground,catchAsync(campgrounds.updateCampground)) //submit the campground edit to db
     .delete(isLoggedIn,isAuthor,catchAsync(campgrounds.delete)) //delete the campground from db
 
 
@@ -41,7 +41,7 @@ router.route('/:id')
 // router.get('/:id',catchAsync(campgrounds.showCampground))
 
 //show edit campground
-router.get('/:id/edit',isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm))
+router.get('/:id/edit',isLoggedIn, isAuthor,catchAsync(campgrounds.renderEditForm))
 
 //submit the campground edit to db
 // router.put('/:id',isLoggedIn,isAuthor,validateCampground,catchAsync(campgrounds.updateCampground))
