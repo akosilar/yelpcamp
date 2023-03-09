@@ -155,9 +155,7 @@
         <p class="starability-result" data-rating="<%= review.rating %>">
           Rated: <%= review.rating %> stars
         </p>
-        <!-- <h6 class="card-subtitle mb-2 text-muted">
-          By <%= review.author.username%>
-        </h6> -->
+
         <p class="card-text">Review: <%= review.body %></p>
         <% if(currentUser && review.author.equals(currentUser)) {%>
 
@@ -174,17 +172,8 @@
   </div>
 </div>
 
-<!-- <h1><%= search.title %></h1>
-<h2><%= search.location %></h2>
-<img src="<%= search.image %> " alt="" srcset="" />
-<p><%= search.description %></p>
-<p>
-  <a href="/campgrounds/<%= search._id %>/edit ">Edit</a>
-</p>
-<p></p> -->
-<!-- <footer></footer> -->
 <script>
-  const mapToken = '<%-process.env.MAPBOX_TOKEN%>' ;
-  const campground = <%-JSON.stringify(search)%> ;
+  const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+  const campground = <%- JSON.stringify(search) %> ;
 </script>
 <script src="/javascripts/showPageMap.js"></script>
