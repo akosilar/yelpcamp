@@ -56,6 +56,10 @@ const seedDB = async () => {
             // image: await seedImg(),
             description: 'lorem',
             price,
+            geometry: {
+              type: "Point",
+              coordinates: [-113.1331,47.0202]
+            },
             images: [
               {
                 url: 'https://res.cloudinary.com/dsxg9ct6a/image/upload/v1677114109/YelpCamp/um0aoycbt5lneheb9tca.jpg',
