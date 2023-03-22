@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV !== 'production'){
+if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
@@ -13,11 +13,13 @@ const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const mongoSanitize = require('express-mongo-sanitize');
+
 
 const ExpressError = require('./utils/ExpressError')
 const Campground = require('./models/campground')
 const Review = require('./models/review')
-const {campgroundSchema,reviewSchema} = require('./schemas.js')
+const { campgroundSchema, reviewSchema } = require('./schemas.js')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
@@ -32,7 +34,7 @@ const dbURI = process.env.dbURI
 mongoose.connect(dbURI)
 
 const db = mongoose.connection
-db.on('error', console.error.bind(console,'connection error'))
+db.on('error', console.error.bind(console, 'connection error'))
 db.once('open', () => {
     console.log('db connected')
 })
@@ -43,7 +45,11 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(methodOverride('_method')) //for routes other than get and post
 app.engine('ejs', ejsMate)
-app.use(express.static(path.join(__dirname,'public'))) //allows use of static assets in the public folder
+app.use(express.static(path.join(__dirname, 'public'))) //allows use of static assets in the public folder
+app.use(mongoSanitize({
+    replaceWith: '_',
+}));
+
 
 const sessionConfig = {
     secret: 'thisshouldbeabettersecret!',
@@ -66,17 +72,18 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-app.use((req,res,next) => {
-    console.log(req.session)
+app.use((req, res, next) => {
+    // console.log(req.session)
+    console.log(req.query)
     res.locals.currentUser = req.user
     res.locals.success = req.flash('success')
     res.locals.error = req.flash('error')
     next()
 })
 
-app.get('/fakeUser', async(req,res) => {
-    const user = new User({email: 'jan@gmail.com', username: 'akosilar'})
-    const newUser = await User.register(user,'chicken')
+app.get('/fakeUser', async (req, res) => {
+    const user = new User({ email: 'jan@gmail.com', username: 'akosilar' })
+    const newUser = await User.register(user, 'chicken')
     res.send(newUser)
 })
 
@@ -85,21 +92,21 @@ app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
 
 
 
 
-app.all('*', (req,res,next) => {
+app.all('*', (req, res, next) => {
     next(new ExpressError('Page not found', 404))
 })
 
-app.use((err,req,res,next) => {
-    const {statusCode = 500,message ='something went wrong'} = err
-    if(!err.message) err.message = 'oh noes, something went wrong'
-    res.status(statusCode).render('error', {err})
+app.use((err, req, res, next) => {
+    const { statusCode = 500, message = 'something went wrong' } = err
+    if (!err.message) err.message = 'oh noes, something went wrong'
+    res.status(statusCode).render('error', { err })
     // res.send('something went wrong')
 })
 
