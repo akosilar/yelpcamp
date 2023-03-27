@@ -52,9 +52,11 @@ app.use(mongoSanitize({
     replaceWith: '_',
 }));
 
+const secret = process.env.SECRET
+
 const store = new MongoStore({
     mongoUrl: dbURI,
-    secret: 'thisshouldbeabettersecret!',
+    secret: secret,
     touchAfter: 24 * 60 * 60
 })
 
